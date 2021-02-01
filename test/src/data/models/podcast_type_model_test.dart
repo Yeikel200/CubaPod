@@ -9,8 +9,7 @@ import 'package:cubapod/src/data/api/queries/queries.dart' as queries;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final mapPodcastTypeModel =
-      jsonDecode(queries.responsePodcast)['data']['podcast'];
+  final mapPodcastTypeModel = jsonDecode(queries.responsePodcast)['podcast'];
 
   test('should return a valid model the [fromJson] method', () async {
     //print(mapPodcastTypeModel);

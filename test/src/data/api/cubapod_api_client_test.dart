@@ -25,12 +25,8 @@ void main() {
     cubaPodApiClient = CubaPodApiClient(graphQLClient: mockGraphQLClient);
   });
 
-  // Map<String, dynamic> response = jsonDecode(queries.responseGetStatus);
-  //final status = response['data'];
-
   group('GetStatus ', () {
     test('get status when the QueryResult is "ok" ', () async {
-      //parseString();
       when(
         mockGraphQLClient.query(any),
       ).thenAnswer((_) async => QueryResult(
@@ -41,10 +37,7 @@ void main() {
 
       final result = await cubaPodApiClient.getStatus();
 
-      expect(
-        result,
-        true,
-      );
+      expect(result, true);
     });
 
     test('get status when the result is not "ok" ', () async {
@@ -60,18 +53,35 @@ void main() {
 
       expect(result, false);
     });
-  });
-
-  group('GetCategory ', () {
-    final map = jsonDecode(queries.responseCategory)['data']['category'];
-
-    final tCategoryTypeModel = CategoryTypeModel.fromJson(map);
-
-    test('when pass a param', () async {
+    test(
+        'should return [StatusRequestFailure] when the call to client is not succes',
+        () async {
       when(
         mockGraphQLClient.query(any),
       ).thenAnswer((_) async => QueryResult(
-            data: queries.responseCategory,
+            data: null,
+            exception: OperationException(),
+            loading: false,
+          ));
+
+      try {
+        await cubaPodApiClient.getStatus();
+      } on Exception catch (e) {
+        expect(e, isA<StatusRequestFailure>());
+      }
+    });
+  });
+  group('GetCategory ', () {
+    final map = jsonDecode(queries.responseCategory)['category'];
+
+    final tCategoryTypeModel = CategoryTypeModel.fromJson(map);
+
+    test('get the details of an [CategoryType] object by knowing ist slug',
+        () async {
+      when(
+        mockGraphQLClient.query(any),
+      ).thenAnswer((_) async => QueryResult(
+            data: jsonDecode(queries.responseCategory),
             exception: null,
             loading: false,
           ));
@@ -79,25 +89,35 @@ void main() {
       final result =
           await cubaPodApiClient.getCategory(categoryName: 'tecnologia');
 
-      expect(
-        result,
-        tCategoryTypeModel,
-      );
+      expect(result, tCategoryTypeModel);
+    });
+    test(
+        'should return [StatusRequestFailure] when the call to client is not succes',
+        () async {
+      when(
+        mockGraphQLClient.query(any),
+      ).thenAnswer((_) async => QueryResult(
+            data: null,
+            exception: OperationException(),
+            loading: false,
+          ));
+
+      try {
+        await cubaPodApiClient.getCategory(categoryName: 'tecnologia');
+      } on Exception catch (e) {
+        expect(e, isA<StatusRequestFailure>());
+      }
     });
   });
 
   group('GetCategoriesList', () {
-    final data =
-        jsonDecode(queries.responseCategories)['data']['categories'] as List;
-
+    final data = jsonDecode(queries.responseCategories)['categories'];
     final tCategoryTypeModelList =
         data.map((e) => CategoryTypeModel.fromJson(e)).toList();
 
     test('Get a list the all category in the plataform', () async {
-      when(
-        mockGraphQLClient.query(any),
-      ).thenAnswer((_) async => QueryResult(
-            data: queries.responseCategories,
+      when(mockGraphQLClient.query(any)).thenAnswer((_) async => QueryResult(
+            data: jsonDecode(queries.responseCategories),
             exception: null,
             loading: false,
           ));
@@ -106,17 +126,33 @@ void main() {
 
       expect(result, tCategoryTypeModelList);
     });
+
+    test(
+        'should return [StatusRequestFailure] when the call to client is not succes',
+        () async {
+      when(mockGraphQLClient.query(any)).thenAnswer((_) async => QueryResult(
+            data: null,
+            exception: OperationException(),
+            loading: false,
+          ));
+
+      try {
+        await cubaPodApiClient.getCategoriesList();
+      } on Exception catch (e) {
+        expect(e, isA<StatusRequestFailure>());
+      }
+    });
   });
 
   group('GetPodcast ', () {
-    final map = jsonDecode(queries.responsePodcast)['data']['podcast'];
-    //print(map);
+    final map = jsonDecode(queries.responsePodcast)['podcast'];
     final tPodcastTypeModel = PodcastTypeModel.fromJson(map);
-    test('when pass a param', () async {
+    test('get the details of an [PodcastType] object by knowing ist slug',
+        () async {
       when(
         mockGraphQLClient.query(any),
       ).thenAnswer((_) async => QueryResult(
-            data: queries.responsePodcast,
+            data: jsonDecode(queries.responsePodcast),
             exception: null,
             loading: false,
           ));
@@ -124,25 +160,34 @@ void main() {
       final result =
           await cubaPodApiClient.getPodcast(podcastName: 'la-mente-creativa');
 
-      expect(
-        result,
-        tPodcastTypeModel,
-      );
+      expect(result, tPodcastTypeModel);
+    });
+    test(
+        'should return [StatusRequestFailure] when the call to client is not succes',
+        () async {
+      when(
+        mockGraphQLClient.query(any),
+      ).thenThrow(StatusRequestFailure());
+
+      final result =
+          cubaPodApiClient.getPodcast(podcastName: 'la-mente-creativa');
+
+      expect(result, throwsA(isA<StatusRequestFailure>()));
     });
   });
 
   group('GetPodcastsList', () {
-    final data =
-        jsonDecode(queries.responsePodcasts)['data']['podcasts'] as List;
+    final data = jsonDecode(queries.responsePodcasts)['podcasts'] as List;
 
     final tPodcastsTypeModelList =
         data.map((e) => PodcastTypeModel.fromJson(e)).toList();
 
-    test('Get a list the podcasts', () async {
+    test('get the list of an [PodcastType] object whose category is known',
+        () async {
       when(
         mockGraphQLClient.query(any),
       ).thenAnswer((_) async => QueryResult(
-            data: queries.responsePodcasts,
+            data: jsonDecode(queries.responsePodcasts),
             exception: null,
             loading: false,
           ));
@@ -151,6 +196,24 @@ void main() {
           await cubaPodApiClient.getPodcastsList(categorySlug: 'tecnologia');
 
       expect(result, tPodcastsTypeModelList);
+    });
+
+    test(
+        'should return [StatusRequestFailure] when the call to client is not succes',
+        () async {
+      when(
+        mockGraphQLClient.query(any),
+      ).thenAnswer((_) async => QueryResult(
+            data: null,
+            exception: OperationException(),
+            loading: false,
+          ));
+
+      try {
+        await cubaPodApiClient.getPodcastsList(categorySlug: 'tecnologia');
+      } on Exception catch (e) {
+        expect(e, isA<StatusRequestFailure>());
+      }
     });
   });
 }

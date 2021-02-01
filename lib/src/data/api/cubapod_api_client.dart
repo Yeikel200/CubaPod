@@ -10,9 +10,9 @@ import 'package:graphql/client.dart';
 
 import 'package:cubapod/src/data/api/queries/queries.dart' as queries;
 
-class GetPodcastRequestFailure implements Exception {}
-
 class StatusRequestFailure implements Exception {}
+
+class RequestFailure implements Exception {}
 
 class CubaPodApiClient extends ApiClinet {
   CubaPodApiClient({GraphQLClient graphQLClient})
@@ -37,7 +37,7 @@ class CubaPodApiClient extends ApiClinet {
       throw StatusRequestFailure();
     }
 
-    final status = result.data['data']['status'];
+    final status = result.data['status'];
 
     if (status == 'ok') {
       return true;
@@ -53,12 +53,12 @@ class CubaPodApiClient extends ApiClinet {
 
     final result = await _graphQLClient.query(options);
     if (result.hasException) {
-      throw GetPodcastRequestFailure();
+      throw StatusRequestFailure();
     }
-    final data =
-        jsonDecode(queries.responseCategories)['data']['categories'] as List;
 
-    return data.map((e) => CategoryTypeModel.fromJson(e)).toList();
+    final map = result.data['categories'] as List;
+
+    return map.map((e) => CategoryTypeModel.fromJson(e)).toList();
   }
 
   @override
@@ -75,9 +75,8 @@ class CubaPodApiClient extends ApiClinet {
     if (result.hasException) {
       throw StatusRequestFailure();
     }
-    final response = jsonDecode(result.data);
 
-    return CategoryTypeModel.fromJson(response['data']['category']);
+    return CategoryTypeModel.fromJson(result.data['category']);
   }
 
   @override
@@ -92,9 +91,9 @@ class CubaPodApiClient extends ApiClinet {
     if (result.hasException) {
       throw StatusRequestFailure();
     }
-    final response = jsonDecode(result.data);
+    final response = result.data['podcast'];
 
-    return PodcastTypeModel.fromJson(response['data']['podcast']);
+    return PodcastTypeModel.fromJson(response);
   }
 
   @override
@@ -109,11 +108,11 @@ class CubaPodApiClient extends ApiClinet {
     );
     final result = await _graphQLClient.query(options);
     if (result.hasException) {
-      throw GetPodcastRequestFailure();
+      throw StatusRequestFailure();
     }
-    final data =
-        jsonDecode(queries.responsePodcasts)['data']['podcasts'] as List;
 
-    return data.map((e) => PodcastTypeModel.fromJson(e)).toList();
+    final map = result.data['podcasts'] as List;
+
+    return map.map((e) => PodcastTypeModel.fromJson(e)).toList();
   }
 }

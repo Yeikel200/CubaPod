@@ -21,6 +21,22 @@ void main() {
     podcastRepository = PodcastRepositoryImpl(client: mockCubaPodApiClient);
   });
 
+  final tCategoryTypeModel = CategoryTypeModel.fromJson(
+      jsonDecode(queries.responseCategory)['category']);
+  final dataCategory =
+      jsonDecode(queries.responseCategories)['categories'] as List;
+
+  final tCategoryTypeModelList =
+      dataCategory.map((e) => CategoryTypeModel.fromJson(e)).toList();
+  Map<String, dynamic> responseQuerie = jsonDecode(queries.responsePodcast);
+
+  final tPodcastTypeModel =
+      PodcastTypeModel.fromJson(responseQuerie['podcast']);
+  final dataPodcast = jsonDecode(queries.responsePodcasts)['podcasts'] as List;
+
+  final tPodcastsTypeModelList =
+      dataPodcast.map((e) => PodcastTypeModel.fromJson(e)).toList();
+
   group('GetStatus ', () {
     test('get status when the QueryResult is "ok" ', () async {
       when(
@@ -47,14 +63,6 @@ void main() {
   });
 
   group('GetCategory', () {
-    final tCategoryTypeModel = CategoryTypeModel.fromJson(
-        jsonDecode(queries.responseCategory)['data']['category']);
-    final data =
-        jsonDecode(queries.responseCategories)['data']['categories'] as List;
-
-    final tCategoryTypeModelList =
-        data.map((e) => CategoryTypeModel.fromJson(e)).toList();
-
     test('get the details of an [CategoryType] object by knowing ist slug',
         () async {
       when(
@@ -68,7 +76,9 @@ void main() {
 
       expect(result, tCategoryTypeModel);
     });
+  });
 
+  group('GetCategoriesList', () {
     test('get a list the all category in the plataform', () async {
       when(
         mockCubaPodApiClient.getCategoriesList(),
@@ -79,18 +89,7 @@ void main() {
       expect(result, tCategoryTypeModelList);
     });
   });
-
   group('GetPodcast', () {
-    Map<String, dynamic> responseQuerie = jsonDecode(queries.responsePodcast);
-
-    final tPodcastTypeModel =
-        PodcastTypeModel.fromJson(responseQuerie['data']['podcast']);
-    final data =
-        jsonDecode(queries.responsePodcasts)['data']['podcasts'] as List;
-
-    final tPodcastsTypeModelList =
-        data.map((e) => PodcastTypeModel.fromJson(e)).toList();
-
     test('get the details of an [PodcastType] object by knowing ist slug',
         () async {
       when(mockCubaPodApiClient.getPodcast(podcastName: 'El Bache')).thenAnswer(
@@ -102,7 +101,8 @@ void main() {
 
       expect(result, tPodcastTypeModel);
     });
-
+  });
+  group('GetPodcastsList', () {
     test('get the list of an [PodcastType] object whose category is known',
         () async {
       when(mockCubaPodApiClient.getPodcastsList(categorySlug: 'tecnologia'))

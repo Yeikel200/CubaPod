@@ -14,15 +14,13 @@ query category ($slug: String!) {
 
 const responseCategory = '''
 {
-    "data": {
-        "category": {
-            "name": "Tecnología",
-            "slug": "tecnologia",
-            "description": "La actualidad de la innovación tecnológica",
-            "img": "categories/technology.png",
-            "icon": "space-station",
-            "color": "#33A8C7",
-            "podcastsCount": 16
-        }
-    }
+  "category": {
+      "name": "Tecnología",
+      "slug": "tecnologia",
+      "description": "La actualidad de la innovación tecnológica",
+      "img": "categories/technology.png",
+      "icon": "space-station",
+      "color": "#33A8C7",
+      "podcastsCount": 16
+  }
 }''';

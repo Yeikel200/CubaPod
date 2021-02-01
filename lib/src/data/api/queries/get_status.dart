@@ -7,14 +7,10 @@ const qGetStatus = r'''
 
 const responseGetStatusTrue = '''
 {
-  "data": {
-    "status": "ok"
-  }
+  "status": "ok"
 }''';
 
 const responseGetStatusFalse = '''
 {
-  "data": {
-    "status": "oko"
-  }
+  "status": "oko"
 }''';
