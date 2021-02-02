@@ -1,6 +1,11 @@
+import 'package:cubapod/injector.dart' as di;
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.setup();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
