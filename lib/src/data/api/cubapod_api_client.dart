@@ -1,3 +1,4 @@
+import 'package:cubapod/core/error/exception.dart';
 import 'package:cubapod/src/data/models/category_type_model.dart';
 import 'package:cubapod/src/data/models/podcast_type_model.dart';
 import 'package:cubapod/src/data/api_client.dart';
@@ -7,10 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:graphql/client.dart';
 
 import 'package:cubapod/src/data/api/queries/queries.dart' as queries;
-
-class StatusRequestFailure implements Exception {}
-
-class RequestFailure implements Exception {}
 
 class CubaPodApiClient extends ApiClinet {
   CubaPodApiClient({GraphQLClient graphQLClient})
@@ -99,9 +96,10 @@ class CubaPodApiClient extends ApiClinet {
     @required String categorySlug,
   }) async {
     final options = QueryOptions(
-      documentNode: gql(queries.qPodcasts),
+      documentNode: gql(queries.qPodcasts_lite),
       variables: <String, dynamic>{
         'categorySlug': categorySlug,
+        'page': 0,
       },
     );
     final result = await _graphQLClient.query(options);

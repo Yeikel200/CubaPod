@@ -1,7 +1,6 @@
 import 'package:cubapod/core/platform/network_info.dart';
 import 'package:cubapod/src/data/api/cubapod_api_client.dart';
 import 'package:cubapod/src/data/api_client.dart';
-import 'package:cubapod/src/data/datasource/local_data_source.dart';
 import 'package:cubapod/src/data/repository/podcast_repository_impl.dart';
 import 'package:cubapod/src/domine/repository/podcast_repository.dart';
 import 'package:cubapod/src/domine/usecase/get_categories_list_usecase.dart';
@@ -36,11 +35,11 @@ Future<void> setup() async {
   );
 
   // Data sources
-  sl.registerSingleton<LocalDataSource>(
-    LocalDataSourceImpl(
-      sharedPreferences: sl(),
-    ),
-  );
+  // sl.registerSingleton<LocalDataSource>(
+  //   LocalDataSourceImpl(
+  //       // sharedPreferences: sl(),
+  //       ),
+  // );
 
   // Repository
   sl.registerLazySingleton<PodcastRepository>(

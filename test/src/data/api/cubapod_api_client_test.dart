@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cubapod/core/error/exception.dart';
 import 'package:cubapod/src/data/api/cubapod_api_client.dart';
 import 'package:cubapod/src/data/models/category_type_model.dart';
 import 'package:cubapod/src/data/models/podcast_type_model.dart';

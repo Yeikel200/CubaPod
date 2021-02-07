@@ -1,14 +1,22 @@
 const qPodcasts = r'''
 query podcasts($categorySlug: String!, $page: Int!,) {
   podcasts(categorySlug: $categorySlug) {
-    title
-        url
         title
+        url
         subtitle
         image
         link
         author
         summary
+        category {
+            name
+            slug
+            description
+            img
+            color
+            podcastsCount
+        }
+        episodesCount
         episodes (page: $page) {
             page
             pages
@@ -25,7 +33,7 @@ query podcasts($categorySlug: String!, $page: Int!,) {
                 botDirectLink
             }
         }
-  }
+    }
 }''';
 
 //   *** Variable ***

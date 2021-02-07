@@ -25,4 +25,16 @@ class CategoryTypeModel extends CategoryType {
       _$CategoryTypeModelFromJson(data);
 
   Map<String, dynamic> toJson() => _$CategoryTypeModelToJson(this);
+
+  @override
+  String toString() {
+    return '''CategoryTypeModel(
+    name: $name,
+    slug: $slug,
+    description: $description,
+    img: $img,
+    color: $color,
+    podcastsCount: $podcastsCount,
+)''';
+  }
 }

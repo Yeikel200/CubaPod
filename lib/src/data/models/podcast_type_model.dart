@@ -44,4 +44,21 @@ class PodcastTypeModel extends PodcastType {
       _$PodcastTypeModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PodcastTypeModelToJson(this);
+
+  @override
+  String toString() {
+    return '''
+  PodcastTypeModel(
+    slug: $slug,
+    title: $title,
+    subtitle: $subtitle,
+    author: $author,
+    image: $image,
+    summary: $summary,
+    episodesCount: $episodesCount,
+    category: $category,
+    episodes: $episodes,
+  )
+  ''';
+  }
 }
