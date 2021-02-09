@@ -16,7 +16,7 @@ It uses the Clean Architecture pattern, and for presentation layer state managem
     - [x] Podcast details screen
       - [x] Information page
       - [x] List of episodes page
-      - [ ] Episode details
+      - [ ] Episode details whit reproducion player
 
 * [ ] Podcast player:
     - [ ] Play
