@@ -5,8 +5,10 @@ import 'package:cubapod/src/data/repository/podcast_repository_impl.dart';
 import 'package:cubapod/src/domine/model/category_type.dart';
 import 'package:cubapod/src/domine/repository/podcast_repository.dart';
 import 'package:cubapod/src/domine/usecase/get_categories_list_usecase.dart';
+import 'package:cubapod/src/domine/usecase/get_podcast_usecase.dart';
 import 'package:cubapod/src/domine/usecase/get_podcasts_list_usecase.dart';
 import 'package:cubapod/src/domine/usecase/get_status_usecase.dart';
+import 'package:cubapod/src/presentation/application/podcast_notifier.dart';
 import 'package:cubapod/src/presentation/application/podcasts_list_notifier.dart';
 import 'package:cubapod/src/presentation/application/select_topic_notifier.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
@@ -87,6 +89,13 @@ final podcastsListStateNotifierProvider =
   final repository = ref.watch(podcastRepositoryProvider);
   final podcasts = GetPodcastsListUsecase(dataRepository: repository);
   return PodcastListNotifier(getPodcastsListUsecase: podcasts);
+});
+
+final podcastDetailsStateNotifierProvider =
+    StateNotifierProvider<PodcastDetailsNotifier>((ref) {
+  final repository = ref.watch(podcastRepositoryProvider);
+  final podcast = GetPodcastUsecase(dataRepository: repository);
+  return PodcastDetailsNotifier(getPodcastUsecase: podcast);
 });
 
 // FutureProvider

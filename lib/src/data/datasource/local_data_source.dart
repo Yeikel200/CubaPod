@@ -29,9 +29,9 @@ class LocalDataSourceImpl extends LocalDataSource {
 
   @override
   Future<List<CategoryTypeModel>> getSelectedCategoryList() async {
-    final SharedPreferences sharedPreferences =
-        await ref.watch(sharedPreferencesFutureProvider.future);
-    // final sharedPreferences = await SharedPreferences.getInstance();
+    // final SharedPreferences sharedPreferences =
+    await ref.watch(sharedPreferencesFutureProvider.future);
+    final sharedPreferences = await SharedPreferences.getInstance();
     final jsonString =
         sharedPreferences.getStringList(SP_SELECTED_CATEGORY_LIST);
     if (jsonString != null) {

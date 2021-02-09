@@ -83,7 +83,7 @@ void main() {
 
       // act
       final result = await dataSource.isCategoriesSelected();
-      print(result);
+
       // assert
       verify(mockSharedPreferences.getBool(SP_IS_CATEGORIES_SELECTED));
       expect(result, equals(true));

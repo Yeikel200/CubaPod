@@ -1,17 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cubapod/src/data/models/podcast_type_model.dart';
 import 'package:cubapod/src/presentation/application/podcasts_list_notifier.dart';
+import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
+import 'package:cubapod/src/presentation/screens/podcast_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/all.dart';
 
 class PodcastListWidget extends StatelessWidget {
   const PodcastListWidget({
     Key key,
     @required this.podcastListModel,
-    @required this.cacheManager,
   }) : super(key: key);
 
   final PodcastListModel podcastListModel;
-  final CacheManager cacheManager;
 
   @override
   Widget build(BuildContext context) {
@@ -56,84 +57,16 @@ class PodcastListWidget extends StatelessWidget {
               ),
             ),
             Container(
-              height: size.height * 0.34,
+              height: size.height * 0.32,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(vertical: 6.0),
                 itemCount: podcastListModel.podcastList.length,
                 itemBuilder: (context, index) {
-                  final episodesCount =
-                      podcastListModel.podcastList[index].episodesCount;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Card(
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Container(
-                          width: size.height * 0.3,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  color: Colors.blueAccent,
-                                  width: double.infinity,
-                                  child: CachedNetworkImage(
-                                    cacheManager: cacheManager,
-                                    fit: BoxFit.fill,
-                                    imageUrl:
-                                        '${podcastListModel.podcastList[index].image}',
-                                    placeholder: (context, url) => Center(
-                                        child: CircularProgressIndicator()),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        podcastListModel
-                                            .podcastList[index].title,
-                                        softWrap: true,
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            color: Colors.black87,
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        height: 8.0,
-                                      ),
-                                      Text(
-                                        episodesCount >= 2
-                                            ? '${podcastListModel.podcastList[index].episodesCount} episodes'
-                                            : '${podcastListModel.podcastList[index].episodesCount} episode',
-                                        style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                  final podcastTypeModel = podcastListModel.podcastList[index];
+                  return _PodcastWidget(
+                    index: index,
+                    podcastTypeModel: podcastTypeModel,
                   );
                 },
               ),
@@ -142,5 +75,122 @@ class PodcastListWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _PodcastWidget extends StatelessWidget {
+  const _PodcastWidget({
+    Key key,
+    @required this.index,
+    @required this.podcastTypeModel,
+  }) : super(key: key);
+
+  final int index;
+  final PodcastTypeModel podcastTypeModel;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Consumer(builder: (context, watch, child) {
+      final cacheManager = watch(customCacheManagerProvider);
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+        child: Card(
+          elevation: 4.0,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          child: InkWell(
+            onTap: () {
+              context
+                  .read(podcastDetailsStateNotifierProvider)
+                  .getPodcastDeatails(podcastSlug: podcastTypeModel.slug);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PodcastDetailsScreen(),
+                  ));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0),
+              child: Stack(children: [
+                Container(
+                  width: size.height * 0.25,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          width: double.infinity,
+                          child: Hero(
+                            tag: podcastTypeModel.slug,
+                            child: CachedNetworkImage(
+                              cacheManager: cacheManager,
+                              fit: BoxFit.fill,
+                              imageUrl: '${podcastTypeModel.image}',
+                              placeholder: (context, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                podcastTypeModel.title,
+                                softWrap: true,
+                                maxLines: 2,
+                                textScaleFactor:
+                                    MediaQuery.textScaleFactorOf(context),
+                                style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 6.0,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  podcastTypeModel.episodesCount >= 2
+                                      ? '${podcastTypeModel.episodesCount} episodes'
+                                      : '${podcastTypeModel.episodesCount} episode',
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  right: 0.0,
+                  child: IconButton(
+                    icon: Icon(Icons.favorite_border),
+                    color: Colors.red,
+                    onPressed: () {},
+                  ),
+                )
+              ]),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }

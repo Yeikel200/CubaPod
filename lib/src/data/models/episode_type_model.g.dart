@@ -11,7 +11,7 @@ EpisodeTypeModel _$EpisodeTypeModelFromJson(Map<String, dynamic> json) {
     slug: json['slug'] as String,
     guid: json['guid'] as String,
     title: json['title'] as String,
-    summary: json['summary'] as String,
+    summary: _deleteHtml(json['summary'] as String ?? ' '),
     enclosure: json['enclosure'] as String,
     link: json['link'] as String,
     image: json['image'] as String,
@@ -32,3 +32,12 @@ Map<String, dynamic> _$EpisodeTypeModelToJson(EpisodeTypeModel instance) =>
       'itunesDuration': instance.itunesDuration,
       'publishedAt': instance.publishedAt,
     };
+
+String _deleteHtml(String desc) {
+  desc = desc?.replaceAll(
+      RegExp(r'<[^>]*>', multiLine: true, caseSensitive: true), '');
+  desc = desc.replaceAll('\\r\\n', '');
+  desc = desc.replaceAll('\\n', '');
+  desc = desc.replaceAll('\\r', '');
+  return desc;
+}

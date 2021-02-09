@@ -38,7 +38,7 @@ class ErrorPodcastListState extends PodcastListState {
   List<Object> get props => [];
 }
 
-class PodcastListNotifier extends StateNotifier {
+class PodcastListNotifier extends StateNotifier<PodcastListState> {
   PodcastListNotifier({GetPodcastsListUsecase getPodcastsListUsecase})
       : _getPodcastsListUsecase = getPodcastsListUsecase,
         super(InitialPodcastListState());
