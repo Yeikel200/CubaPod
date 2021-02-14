@@ -4,7 +4,7 @@ import 'package:cubapod/src/data/models/category_type_model.dart';
 import 'package:cubapod/src/domine/usecase/get_categories_list_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class TopicsState extends Equatable {
   const TopicsState();

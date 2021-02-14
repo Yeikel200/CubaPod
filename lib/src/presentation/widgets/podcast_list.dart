@@ -4,7 +4,7 @@ import 'package:cubapod/src/presentation/application/podcasts_list_notifier.dart
 import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
 import 'package:cubapod/src/presentation/screens/podcast_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PodcastListWidget extends StatelessWidget {
   const PodcastListWidget({

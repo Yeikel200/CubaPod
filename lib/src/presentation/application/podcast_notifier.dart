@@ -3,7 +3,7 @@ import 'package:cubapod/src/data/models/podcast_type_model.dart';
 import 'package:cubapod/src/domine/usecase/get_podcast_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class PodcastDetailsState extends Equatable {
   const PodcastDetailsState();

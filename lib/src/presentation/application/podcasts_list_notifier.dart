@@ -2,7 +2,7 @@ import 'package:cubapod/core/error/exception.dart';
 import 'package:cubapod/src/domine/model/podcast_type.dart';
 import 'package:cubapod/src/domine/usecase/get_podcasts_list_usecase.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class PodcastListState extends Equatable {
   const PodcastListState();

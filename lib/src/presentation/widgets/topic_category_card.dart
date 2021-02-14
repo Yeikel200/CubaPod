@@ -1,6 +1,6 @@
 import 'package:cubapod/src/presentation/application/select_topic_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
 
 class TopicCategoryCardWidget extends StatelessWidget {

@@ -17,7 +17,6 @@ void main() {
     expect(result, tPodcastTypeModel);
   });
   test('should return a JSON map containing the proper data', () async {
-    //print(mapPodcastTypeModel);
     final result = tPodcastTypeModel.toJson();
 
     expect(result, mapPodcastTypeModel);

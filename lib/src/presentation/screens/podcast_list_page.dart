@@ -4,7 +4,7 @@ import 'package:cubapod/src/presentation/screens/select_topics_screen.dart';
 import 'package:cubapod/src/presentation/widgets/loading_podcast_list_shimmer.dart';
 import 'package:cubapod/src/presentation/widgets/podcast_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PodcastListPage extends ConsumerWidget {
   const PodcastListPage();

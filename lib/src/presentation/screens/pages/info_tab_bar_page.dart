@@ -3,7 +3,7 @@ import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
 import 'package:cubapod/src/presentation/widgets/loading_line_shimmer_widget.dart';
 import 'package:cubapod/src/presentation/widgets/paragraph_shemmer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class InfoTabBarPage extends StatelessWidget {
   const InfoTabBarPage({Key key}) : super(key: key);

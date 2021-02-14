@@ -1,4 +1,5 @@
 import 'package:cubapod/src/domine/model/episode_type.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'episode_type_model.g.dart';
@@ -13,7 +14,6 @@ class EpisodeTypeModel extends EpisodeType {
     String enclosure,
     String link,
     String image,
-    String itunesSeason,
     String itunesDuration,
     String publishedAt,
   }) : super(
@@ -32,4 +32,24 @@ class EpisodeTypeModel extends EpisodeType {
       _$EpisodeTypeModelFromJson(data);
 
   Map<String, dynamic> toJson() => _$EpisodeTypeModelToJson(this);
+
+  String get getDate =>
+      DateFormat.yMd().format(DateTime.parse(this.publishedAt));
+
+  @override
+  String toString() {
+    return '''
+  EpisodeTypeModel(
+    slug: $slug,
+    guid: $guid,
+    title: $title,
+    summary: $summary,
+    enclosure: $enclosure,
+    link: $link,
+    image: $image,
+    itunesDuration: $itunesDuration,
+    publishedAt: $publishedAt,
+    );
+  ''';
+  }
 }

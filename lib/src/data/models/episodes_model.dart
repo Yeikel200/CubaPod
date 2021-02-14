@@ -23,4 +23,14 @@ class EpisodesModel extends Episodes {
       _$EpisodesModelFromJson(data);
 
   Map<String, dynamic> toJson() => _$EpisodesModelToJson(this);
+
+  @override
+  String toString() {
+    return '''
+  EpisodesModel(
+    page: $page,
+    pages: $pages,
+    objects: $objects,
+      );''';
+  }
 }

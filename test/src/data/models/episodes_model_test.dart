@@ -11,13 +11,11 @@ void main() {
   final mapPodcastTypeModel =
       jsonDecode(queries.responsePodcast)['podcast']['episodes'];
   test('should return a valid model the [fromJson] method', () async {
-    //print(mapPodcastTypeModel);
     final result = EpisodesModel.fromJson(mapPodcastTypeModel);
 
     expect(result, tPodcastTypeModel.episodes);
   });
   test('should return a JSON map containing the proper data', () async {
-    //print(mapPodcastTypeModel);
     final result = tPodcastTypeModel.episodes.toJson();
 
     expect(result, mapPodcastTypeModel);
