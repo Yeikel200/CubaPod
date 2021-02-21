@@ -1,3 +1,5 @@
+import 'package:cubapod/core/env/environment_config.dart';
+
 import '../../../core/error/exception.dart';
 import '../models/category_type_model.dart';
 import '../models/podcast_type_model.dart';
@@ -15,7 +17,7 @@ class CubaPodApiClient extends ApiClinet {
         _graphQLClient = graphQLClient;
 
   factory CubaPodApiClient.create() {
-    final httpLink = HttpLink(uri: 'https://api.cubapod.net');
+    final httpLink = HttpLink(uri: EnvironmentConfig.apiUrl);
     final link = Link.from([httpLink]);
     return CubaPodApiClient(
       graphQLClient: GraphQLClient(cache: InMemoryCache(), link: link),
