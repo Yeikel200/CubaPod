@@ -1,4 +1,4 @@
-import 'package:cubapod/src/domine/model/episode_type.dart';
+import 'episode_type.dart';
 import 'package:equatable/equatable.dart';
 
 class Episodes extends Equatable {

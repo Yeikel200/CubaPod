@@ -1,7 +1,7 @@
-import 'package:cubapod/src/presentation/screens/pages/episodes_list_tab_bar_page.dart';
-import 'package:cubapod/src/presentation/screens/pages/info_tab_bar_page.dart';
-import 'package:cubapod/src/presentation/widgets/audio_podcast_control.dart';
-import 'package:cubapod/src/presentation/widgets/header_podcast_details_widget.dart';
+import 'pages/episodes_list_tab_bar_page.dart';
+import 'pages/info_tab_bar_page.dart';
+import '../widgets/audio_podcast_control.dart';
+import '../widgets/header_podcast_details_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

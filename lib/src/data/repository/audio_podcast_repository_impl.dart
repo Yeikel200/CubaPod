@@ -1,6 +1,6 @@
-import 'package:cubapod/src/data/podcast_player.dart';
-import 'package:cubapod/src/domine/model/episode_type.dart';
-import 'package:cubapod/src/domine/repository/audio_podcast_repository.dart';
+import '../podcast_player.dart';
+import '../../domine/model/episode_type.dart';
+import '../../domine/repository/audio_podcast_repository.dart';
 import 'package:flutter/foundation.dart';
 
 class AudioPodcastRepositoryImpl extends AudioPodcastRepository {

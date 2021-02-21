@@ -1,4 +1,4 @@
-import 'package:cubapod/src/domine/model/episode_type.dart';
+import '../../domine/model/episode_type.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 

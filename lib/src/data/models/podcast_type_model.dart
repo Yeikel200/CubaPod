@@ -1,6 +1,6 @@
-import 'package:cubapod/src/data/models/category_type_model.dart';
-import 'package:cubapod/src/data/models/episodes_model.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
+import 'category_type_model.dart';
+import 'episodes_model.dart';
+import '../../domine/model/podcast_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'podcast_type_model.g.dart';

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:cubapod/core/error/exception.dart';
-import 'package:cubapod/src/data/podcast_player.dart';
-import 'package:cubapod/src/data/repository/audio_podcast_repository_impl.dart';
-import 'package:cubapod/src/domine/model/episode_type.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
-import 'package:cubapod/src/domine/repository/audio_podcast_repository.dart';
+import '../../../../core/error/exception.dart';
+import '../../../data/podcast_player.dart';
+import '../../../data/repository/audio_podcast_repository_impl.dart';
+import '../../../domine/model/episode_type.dart';
+import '../../../domine/model/podcast_type.dart';
+import '../../../domine/repository/audio_podcast_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_exoplayer/audioplayer.dart';

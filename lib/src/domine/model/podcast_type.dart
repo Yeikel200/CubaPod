@@ -1,5 +1,5 @@
-import 'package:cubapod/src/domine/model/category_type.dart';
-import 'package:cubapod/src/domine/model/episodes.dart';
+import 'category_type.dart';
+import 'episodes.dart';
 import 'package:equatable/equatable.dart';
 
 class PodcastType extends Equatable {

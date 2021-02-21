@@ -1,5 +1,5 @@
-import 'package:cubapod/src/data/models/episode_type_model.dart';
-import 'package:cubapod/src/domine/model/episodes.dart';
+import 'episode_type_model.dart';
+import '../../domine/model/episodes.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'episodes_model.g.dart';

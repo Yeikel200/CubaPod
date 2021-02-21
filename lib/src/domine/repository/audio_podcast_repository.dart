@@ -1,5 +1,5 @@
-import 'package:cubapod/src/data/podcast_player.dart';
-import 'package:cubapod/src/domine/model/episode_type.dart';
+import '../../data/podcast_player.dart';
+import '../model/episode_type.dart';
 import 'package:meta/meta.dart';
 
 abstract class AudioPodcastRepository

@@ -1,13 +1,13 @@
-import 'package:cubapod/core/error/exception.dart';
-import 'package:cubapod/src/data/models/category_type_model.dart';
-import 'package:cubapod/src/data/models/podcast_type_model.dart';
-import 'package:cubapod/src/data/api_client.dart';
-import 'package:cubapod/src/domine/model/category_type.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
+import '../../../core/error/exception.dart';
+import '../models/category_type_model.dart';
+import '../models/podcast_type_model.dart';
+import '../api_client.dart';
+import '../../domine/model/category_type.dart';
+import '../../domine/model/podcast_type.dart';
 import 'package:flutter/foundation.dart';
 import 'package:graphql/client.dart';
 
-import 'package:cubapod/src/data/api/queries/queries.dart' as queries;
+import 'queries/queries.dart' as queries;
 
 class CubaPodApiClient extends ApiClinet {
   CubaPodApiClient({GraphQLClient graphQLClient})

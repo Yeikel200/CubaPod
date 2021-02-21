@@ -1,7 +1,7 @@
-import 'package:cubapod/src/data/api_client.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
-import 'package:cubapod/src/domine/model/category_type.dart';
-import 'package:cubapod/src/domine/repository/podcast_repository.dart';
+import '../api_client.dart';
+import '../../domine/model/podcast_type.dart';
+import '../../domine/model/category_type.dart';
+import '../../domine/repository/podcast_repository.dart';
 
 class PodcastRepositoryImpl extends PodcastRepository {
   final ApiClinet client;

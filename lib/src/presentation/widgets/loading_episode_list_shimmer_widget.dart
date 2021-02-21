@@ -1,5 +1,5 @@
-import 'package:cubapod/src/presentation/widgets/loading_line_shimmer_widget.dart';
-import 'package:cubapod/src/presentation/widgets/paragraph_shemmer_widget.dart';
+import 'loading_line_shimmer_widget.dart';
+import 'paragraph_shemmer_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoadingEpisodesListShimmerWidget extends StatelessWidget {

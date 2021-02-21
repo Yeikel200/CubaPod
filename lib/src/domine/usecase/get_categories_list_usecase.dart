@@ -1,5 +1,5 @@
-import 'package:cubapod/src/domine/model/category_type.dart';
-import 'package:cubapod/src/domine/repository/podcast_repository.dart';
+import '../model/category_type.dart';
+import '../repository/podcast_repository.dart';
 
 class GetCategoriesListUsecase {
   final PodcastRepository dataRepository;

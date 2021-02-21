@@ -1,4 +1,4 @@
-import 'package:cubapod/src/domine/model/category_type.dart';
+import '../../domine/model/category_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'category_type_model.g.dart';

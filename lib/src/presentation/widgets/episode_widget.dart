@@ -1,5 +1,5 @@
-import 'package:cubapod/src/data/models/episode_type_model.dart';
-import 'package:cubapod/src/presentation/widgets/image_play_widget.dart';
+import '../../data/models/episode_type_model.dart';
+import 'image_play_widget.dart';
 import 'package:flutter/material.dart';
 
 class EpisodeWidget extends StatelessWidget {

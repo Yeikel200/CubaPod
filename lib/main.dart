@@ -1,5 +1,5 @@
-import 'package:cubapod/core/app.dart';
-import 'package:cubapod/injector.dart';
+import 'core/app.dart';
+import 'injector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,4 +1,4 @@
-import 'package:cubapod/src/domine/repository/podcast_repository.dart';
+import '../repository/podcast_repository.dart';
 
 class GetStatusUsecase {
   final PodcastRepository dataRepository;

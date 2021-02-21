@@ -1,5 +1,5 @@
-import 'package:cubapod/src/domine/model/category_type.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
+import '../model/category_type.dart';
+import '../model/podcast_type.dart';
 
 abstract class PodcastRepository {
   //Future<Either<Failure, NumberTrivia>>

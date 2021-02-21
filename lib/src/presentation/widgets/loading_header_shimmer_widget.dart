@@ -1,5 +1,5 @@
-import 'package:cubapod/core/constant.dart';
-import 'package:cubapod/src/presentation/widgets/loading_line_shimmer_widget.dart';
+import '../../../core/constant.dart';
+import 'loading_line_shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 const tagHaderPodcastHeroAnimation = 'podcastTypeModelSlug';

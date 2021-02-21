@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:cubapod/core/error/exception.dart';
-import 'package:cubapod/src/data/models/episode_type_model.dart';
-import 'package:cubapod/src/domine/repository/audio_podcast_repository.dart';
+import '../../core/error/exception.dart';
+import 'models/episode_type_model.dart';
+import '../domine/repository/audio_podcast_repository.dart';
 import 'package:flutter_exoplayer/audio_notification.dart';
 import 'package:flutter_exoplayer/audioplayer.dart';
 import 'package:meta/meta.dart';

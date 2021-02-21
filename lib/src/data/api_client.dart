@@ -1,5 +1,5 @@
-import 'package:cubapod/src/domine/model/category_type.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
+import '../domine/model/category_type.dart';
+import '../domine/model/podcast_type.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class ApiClinet {

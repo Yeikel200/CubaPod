@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:cubapod/core/error/exception.dart';
-import 'package:cubapod/src/data/models/category_type_model.dart';
+import '../../../core/error/exception.dart';
+import '../models/category_type_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
