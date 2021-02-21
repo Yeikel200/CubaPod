@@ -1,10 +1,11 @@
-import 'package:cubapod/src/presentation/application/audio_podcast_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/screens/podcast_list_page.dart';
-import 'package:cubapod/src/presentation/screens/search_page.dart';
-import 'package:cubapod/src/presentation/widgets/audio_podcast_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../logic/audio_podcast/audio_podcast_provider.dart';
+import '../logic/panel_control/panel_control_provider.dart';
+import '../widgets/audio_podcast_control.dart';
+import 'podcast_list_page.dart';
+import 'search_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);

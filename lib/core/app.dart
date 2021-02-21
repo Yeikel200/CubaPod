@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/screens/home_screen.dart';
-import 'package:cubapod/src/presentation/screens/select_topics_screen.dart';
-import 'package:cubapod/src/presentation/screens/splash_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../src/presentation/logic/topic_selection/topic_selection_provider.dart';
+import '../src/presentation/screens/home_screen.dart';
+import '../src/presentation/screens/select_topics_screen.dart';
+import '../src/presentation/screens/splash_screen.dart';
 
 class CubaPodApp extends StatelessWidget {
   @override

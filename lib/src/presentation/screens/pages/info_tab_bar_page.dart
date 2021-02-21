@@ -1,9 +1,9 @@
-import 'package:cubapod/src/presentation/application/podcast_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/widgets/loading_line_shimmer_widget.dart';
-import 'package:cubapod/src/presentation/widgets/paragraph_shemmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../logic/podcast_details/podcast_details_provider.dart';
+import '../../widgets/loading_line_shimmer_widget.dart';
+import '../../widgets/paragraph_shemmer_widget.dart';
 
 class InfoTabBarPage extends StatelessWidget {
   const InfoTabBarPage({Key key}) : super(key: key);

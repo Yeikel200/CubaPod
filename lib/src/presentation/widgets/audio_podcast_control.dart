@@ -1,10 +1,11 @@
-import 'package:cubapod/core/constant.dart';
-import 'package:cubapod/src/presentation/application/audio_podcast_notifier.dart';
-import 'package:cubapod/src/presentation/application/panel_control_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/screens/pages/episodes_list_tab_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/constant.dart';
+import '../logic/audio_podcast/audio_podcast_provider.dart';
+import '../logic/panel_control/panel_control_provider.dart';
+import '../logic/podcast_details/podcast_details_provider.dart';
+import '../screens/pages/episodes_list_tab_bar_page.dart';
 
 class AudioPodcastControl extends StatelessWidget {
   const AudioPodcastControl({Key key, @required this.overMenu})

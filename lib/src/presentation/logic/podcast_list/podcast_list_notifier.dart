@@ -1,42 +1,4 @@
-import 'package:cubapod/core/error/exception.dart';
-import 'package:cubapod/src/domine/model/podcast_type.dart';
-import 'package:cubapod/src/domine/usecase/get_podcasts_list_usecase.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-abstract class PodcastListState extends Equatable {
-  const PodcastListState();
-}
-
-class InitialPodcastListState extends PodcastListState {
-  const InitialPodcastListState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class LoadingPodcastListState extends PodcastListState {
-  const LoadingPodcastListState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class LoadedPodcastListState extends PodcastListState {
-  const LoadedPodcastListState({this.podcastList});
-
-  final List<PodcastListModel> podcastList;
-
-  @override
-  List<Object> get props => [podcastList];
-}
-
-class ErrorPodcastListState extends PodcastListState {
-  const ErrorPodcastListState();
-
-  @override
-  List<Object> get props => [];
-}
+part of 'podcast_list_provider.dart';
 
 class PodcastListNotifier extends StateNotifier<PodcastListState> {
   PodcastListNotifier({GetPodcastsListUsecase getPodcastsListUsecase})

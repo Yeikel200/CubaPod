@@ -1,7 +1,4 @@
-import 'package:cubapod/core/constant.dart';
-import 'package:flutter/material.dart';
-
-enum ControlPanelState { HIDE, EXPANDED, VISIBLE }
+part of 'panel_control_provider.dart';
 
 class ControlPanelNotifier extends ChangeNotifier {
   ControlPanelState controlPanelState = ControlPanelState.HIDE;

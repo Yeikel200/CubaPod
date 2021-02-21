@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cubapod/src/data/models/episode_type_model.dart';
-import 'package:cubapod/src/presentation/application/audio_podcast_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/logic/core_provider.dart';
+import '../../data/models/episode_type_model.dart';
+import '../logic/audio_podcast/audio_podcast_provider.dart';
+import '../logic/panel_control/panel_control_provider.dart';
+import '../logic/podcast_details/podcast_details_provider.dart';
 
 class ImagePlayWidget extends StatelessWidget {
   const ImagePlayWidget(
@@ -61,7 +64,7 @@ class ImagePlayWidget extends StatelessWidget {
                               .stop();
                           context
                               .read(panelControlNotifierProvider)
-                              .changeToHide();
+                              .changeToVisble();
                         },
                       );
                     }

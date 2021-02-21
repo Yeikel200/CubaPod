@@ -1,9 +1,10 @@
-import 'package:cubapod/src/presentation/application/podcast_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/widgets/loaded_header_podcast_widget.dart';
-import 'package:cubapod/src/presentation/widgets/loading_header_shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/logic/core_provider.dart';
+import '../logic/podcast_details/podcast_details_provider.dart';
+import 'loaded_header_podcast_widget.dart';
+import 'loading_header_shimmer_widget.dart';
 
 class HeaderPodcastDetailsWidget extends ConsumerWidget {
   const HeaderPodcastDetailsWidget({

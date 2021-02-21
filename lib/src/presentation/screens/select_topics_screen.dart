@@ -1,9 +1,10 @@
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/application/select_topic_notifier.dart';
-import 'package:cubapod/src/presentation/screens/home_screen.dart';
-import 'package:cubapod/src/presentation/widgets/topic_category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../logic/podcast_list/podcast_list_provider.dart';
+import '../logic/topic_selection/topic_selection_provider.dart';
+import '../widgets/topic_category_card.dart';
+import 'home_screen.dart';
 
 class SelectTopicsScreen extends StatelessWidget {
   const SelectTopicsScreen({Key key}) : super(key: key);

@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cubapod/src/data/models/podcast_type_model.dart';
-import 'package:cubapod/src/presentation/application/podcasts_list_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/screens/podcast_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/logic/core_provider.dart';
+import '../../data/models/podcast_type_model.dart';
+import '../logic/podcast_details/podcast_details_provider.dart';
+import '../logic/podcast_list/podcast_list_provider.dart';
+import '../screens/podcast_details_screen.dart';
 
 class PodcastListWidget extends StatelessWidget {
   const PodcastListWidget({

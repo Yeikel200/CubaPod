@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cubapod/core/constant.dart';
-import 'package:cubapod/src/data/models/podcast_type_model.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/constant.dart';
+import '../../data/models/podcast_type_model.dart';
+import '../logic/panel_control/panel_control_provider.dart';
 
 const _maxNameSize = 25.0;
 const _maxCategorySize = 16.0;

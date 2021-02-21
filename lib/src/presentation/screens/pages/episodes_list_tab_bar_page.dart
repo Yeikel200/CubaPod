@@ -1,11 +1,11 @@
-import 'package:cubapod/src/data/models/episode_type_model.dart';
-import 'package:cubapod/src/presentation/application/podcast_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/widgets/episode_widget.dart';
-import 'package:cubapod/src/presentation/widgets/image_play_widget.dart';
-import 'package:cubapod/src/presentation/widgets/loading_episode_list_shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../data/models/episode_type_model.dart';
+import '../../logic/podcast_details/podcast_details_provider.dart';
+import '../../widgets/episode_widget.dart';
+import '../../widgets/image_play_widget.dart';
+import '../../widgets/loading_episode_list_shimmer_widget.dart';
 
 class EpisodesListTabBarPage extends StatelessWidget {
   const EpisodesListTabBarPage({

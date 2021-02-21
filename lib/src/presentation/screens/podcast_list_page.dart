@@ -1,9 +1,9 @@
-import 'package:cubapod/src/presentation/application/podcasts_list_notifier.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
-import 'package:cubapod/src/presentation/widgets/loading_podcast_list_shimmer.dart';
-import 'package:cubapod/src/presentation/widgets/podcast_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../logic/podcast_list/podcast_list_provider.dart';
+import '../widgets/loading_podcast_list_shimmer.dart';
+import '../widgets/podcast_list.dart';
 
 class PodcastListPage extends ConsumerWidget {
   const PodcastListPage();
