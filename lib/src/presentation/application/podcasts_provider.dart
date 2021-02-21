@@ -1,19 +1,26 @@
 import 'package:cubapod/core/platform/network_info.dart';
+import 'package:cubapod/injector.dart';
 import 'package:cubapod/src/data/api/cubapod_api_client.dart';
+import 'package:cubapod/src/data/podcast_player.dart';
 import 'package:cubapod/src/data/datasource/local_data_source.dart';
+import 'package:cubapod/src/data/repository/audio_podcast_repository_impl.dart';
 import 'package:cubapod/src/data/repository/podcast_repository_impl.dart';
 import 'package:cubapod/src/domine/model/category_type.dart';
+import 'package:cubapod/src/domine/repository/audio_podcast_repository.dart';
 import 'package:cubapod/src/domine/repository/podcast_repository.dart';
 import 'package:cubapod/src/domine/usecase/get_categories_list_usecase.dart';
 import 'package:cubapod/src/domine/usecase/get_podcast_usecase.dart';
 import 'package:cubapod/src/domine/usecase/get_podcasts_list_usecase.dart';
 import 'package:cubapod/src/domine/usecase/get_status_usecase.dart';
+import 'package:cubapod/src/presentation/application/audio_podcast_notifier.dart';
+import 'package:cubapod/src/presentation/application/panel_control_notifier.dart';
 import 'package:cubapod/src/presentation/application/podcast_notifier.dart';
 import 'package:cubapod/src/presentation/application/podcasts_list_notifier.dart';
 import 'package:cubapod/src/presentation/application/select_topic_notifier.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_exoplayer/audioplayer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Grahpql Client
@@ -26,9 +33,14 @@ final podcastRepositoryProvider = Provider<PodcastRepository>((ref) {
   return PodcastRepositoryImpl(client: client);
 });
 
+final audioPodcastRepository = Provider<AudioPodcastRepository>((ref) {
+  final pluging = ref.watch(audioPlugingProvider);
+  return AudioPodcastRepositoryImpl(audioPluging: pluging);
+});
+
 // LocalDataSource
 final localDataSourceProvider = Provider<LocalDataSource>((ref) {
-  return LocalDataSourceImpl(ref: ref);
+  return LocalDataSourceImpl(sharedPreferences: sl<SharedPreferences>());
 });
 
 final selectedList = FutureProvider.autoDispose<List<CategoryType>>((ref) {
@@ -41,6 +53,10 @@ final sharedPreferencesFutureProvider = FutureProvider<SharedPreferences>(
 
 final dataConnectionCheckerProvider = Provider<DataConnectionChecker>((ref) {
   return DataConnectionChecker();
+});
+
+final audioPlugingProvider = Provider<AudioPluging>((ref) {
+  return PodcastPlayer(audioPlayer: AudioPlayer());
 });
 
 final customCacheManagerProvider = Provider<CacheManager>((ref) {
@@ -98,6 +114,21 @@ final podcastDetailsStateNotifierProvider =
   return PodcastDetailsNotifier(getPodcastUsecase: podcast);
 });
 
+final audioPodcastStateNotifierProvider =
+    StateNotifierProvider<AudioPodcastNotifier>((ref) {
+  final repository = ref.watch(audioPodcastRepository);
+  ref.onDispose(() {
+    repository.dispose();
+  });
+  return AudioPodcastNotifier(audioPodcastRepository: repository);
+});
+
+// ChengeNotifier
+final panelControlNotifierProvider =
+    ChangeNotifierProvider<ControlPanelNotifier>((ref) {
+  return ControlPanelNotifier();
+});
+
 // FutureProvider
 final statusProvider = FutureProvider<bool>((ref) async {
   final repository = ref.watch(podcastRepositoryProvider);
@@ -110,11 +141,10 @@ final cacheCatergoryListFutureProvider =
   final list =
       await ref.watch(localDataSourceProvider).getSelectedCategoryList();
   if (list.isNotEmpty) {
-    var setList = Set.from(list.map((e) => e.slug).toList());
-    setList.forEach((element) => ref
-        .read(podcastsListStateNotifierProvider)
-        .getPodcastList(categorySlug: element));
-    Future.delayed(Duration(seconds: 5));
+    var setList = Set<String>.from(list.map((e) => e.slug).toList());
+    final podcasList = ref.read(podcastsListStateNotifierProvider);
+    podcasList.prefCategorySelected.addAll(setList);
+    podcasList.loadPodcastList();
     return true;
   }
   ref.watch(categoryListStateNotifierProvider).getCategoryList();

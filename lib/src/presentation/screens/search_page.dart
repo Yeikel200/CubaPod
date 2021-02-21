@@ -24,10 +24,49 @@ class SearchPage extends StatelessWidget {
           },
         ),
         RaisedButton(
-          child: Text('Podcast List'),
+          child: Text('Show SheetBottom'),
           onPressed: () {
-            context.read(categoryListStateNotifierProvider).getCategoryList();
-            Navigator.of(context).pushNamed('/SelectTopics');
+            // Scaffold.of(context).showBottomSheet<void>((BuildContext context) {
+            //   return Container(
+            //     height: 550,
+            //     color: Colors.amber,
+            //     child: Center(
+            //       child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         mainAxisSize: MainAxisSize.min,
+            //         children: <Widget>[
+            //           const Text('BottomSheet'),
+            //           ElevatedButton(
+            //             child: const Text('Close BottomSheet'),
+            //             onPressed: () => Navigator.pop(context),
+            //           )
+            //         ],
+            //       ),
+            //     ),
+            //   );
+            // });
+            showModalBottomSheet<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  height: 200,
+                  color: Colors.amber,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Text('Modal BottomSheet'),
+                        ElevatedButton(
+                          child: const Text('Close BottomSheet'),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
           },
         ),
       ],

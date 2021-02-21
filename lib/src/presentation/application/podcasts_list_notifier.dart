@@ -45,6 +45,7 @@ class PodcastListNotifier extends StateNotifier<PodcastListState> {
   final GetPodcastsListUsecase _getPodcastsListUsecase;
 
   List<PodcastListModel> podcastList = <PodcastListModel>[];
+  List<String> prefCategorySelected = [];
 
   Future<void> getPodcastList({String categorySlug}) async {
     try {
@@ -58,6 +59,13 @@ class PodcastListNotifier extends StateNotifier<PodcastListState> {
       }
     } on StatusRequestFailure catch (_) {
       state = ErrorPodcastListState();
+    }
+  }
+
+  void loadPodcastList() {
+    if (prefCategorySelected.isNotEmpty) {
+      prefCategorySelected
+          .forEach((element) => this.getPodcastList(categorySlug: element));
     }
   }
 

@@ -1,22 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cubapod/src/data/models/episode_type_model.dart';
-import 'package:cubapod/src/presentation/application/podcasts_provider.dart';
+import 'package:cubapod/src/presentation/widgets/image_play_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
-import 'package:intl/intl.dart';
 
 class EpisodeWidget extends StatelessWidget {
   const EpisodeWidget({
     Key key,
-    this.epidodeTypeModel,
+    this.episodeTypeModel,
   }) : super(key: key);
 
-  final EpisodeTypeModel epidodeTypeModel;
+  final EpisodeTypeModel episodeTypeModel;
 
   @override
   Widget build(BuildContext context) {
-    final date =
-        DateFormat.yMd().format(DateTime.parse(epidodeTypeModel.publishedAt));
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
@@ -30,7 +26,7 @@ class EpisodeWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      epidodeTypeModel.title,
+                      episodeTypeModel?.title,
                       maxLines: 4,
                       style: TextStyle(
                         fontSize: 16,
@@ -40,17 +36,17 @@ class EpisodeWidget extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child:
-                          Text('$date - ${epidodeTypeModel.itunesDuration} min',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black54,
-                              )),
+                      child: Text(
+                          '${episodeTypeModel?.getDate} - ${episodeTypeModel?.itunesDuration} min',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          )),
                     ),
                     Text(
-                      epidodeTypeModel.summary,
+                      episodeTypeModel?.summary,
                       softWrap: true,
-                      maxLines: 18,
+                      maxLines: 4,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black54,
@@ -60,45 +56,9 @@ class EpisodeWidget extends StatelessWidget {
                 ),
               ),
             ),
-            PhysicalModel(
-              color: Colors.grey,
-              elevation: 8.0,
-              child: Container(
-                width: 125.0,
-                height: 125.0,
-                child: Stack(
-                  children: [
-                    Consumer(builder: (context, watch, child) {
-                      final cacheManager = watch(customCacheManagerProvider);
-                      return CachedNetworkImage(
-                        cacheManager: cacheManager,
-                        fit: BoxFit.fill,
-                        imageUrl: '${epidodeTypeModel.image}',
-                        placeholder: (context, url) =>
-                            Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      );
-                    }),
-                    Positioned.fill(
-                      child: Container(
-                        color: Colors.white.withOpacity(0.5),
-                      ),
-                    ),
-                    Positioned(
-                      top: 30.0,
-                      left: 30.0,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.play_arrow,
-                        ),
-                        iconSize: 50.0,
-                        // color: Colors.green,
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            ImagePlayWidget(
+              epidodeTypeModel: episodeTypeModel,
+              size: size.width * 0.32,
             )
           ],
         ),

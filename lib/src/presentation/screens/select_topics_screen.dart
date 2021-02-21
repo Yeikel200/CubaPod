@@ -3,13 +3,14 @@ import 'package:cubapod/src/presentation/application/select_topic_notifier.dart'
 import 'package:cubapod/src/presentation/screens/home_screen.dart';
 import 'package:cubapod/src/presentation/widgets/topic_category_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SelectTopicsScreen extends StatelessWidget {
   const SelectTopicsScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -98,19 +99,41 @@ class SelectTopicsScreen extends StatelessWidget {
                     },
                   );
                 } else {
-                  return Center(
-                      child: Column(
+                  return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Error...'),
-                      RaisedButton(
-                        child: Text('Reintentar'),
-                        onPressed: () => context
-                            .read(categoryListStateNotifierProvider)
-                            .getCategoryList(),
+                      Expanded(
+                        flex: 4,
+                        child: Icon(
+                          Icons.error_rounded,
+                          size: size.width * 0.25,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Upsss... !!',
+                          style: TextStyle(fontSize: size.width * 0.05),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Algo salió mal, asegurece de estar conectado !!',
+                          style: TextStyle(fontSize: size.width * 0.03),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 32.0),
+                        child: RaisedButton(
+                          child: Text('Reintentar'),
+                          onPressed: () => context
+                              .read(categoryListStateNotifierProvider)
+                              .getCategoryList(),
+                        ),
                       ),
                     ],
-                  ));
+                  );
                 }
               }),
             ),
